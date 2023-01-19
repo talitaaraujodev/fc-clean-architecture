@@ -21,7 +21,7 @@ describe('AddressRepository tests', () => {
     await TestDataSource.destroy();
   });
 
-  it('save_whenAddressValid_returnSuccess', async () => {
+  test('save_whenAddressValid_returnSuccess', async () => {
     const repository = TestDataSource.getRepository(AddressEntity);
 
     const address = await repository.save({
@@ -37,7 +37,7 @@ describe('AddressRepository tests', () => {
     expect(address).toHaveProperty('zip');
     expect(address.city).toBe('São Paulo');
   });
-  it('find_whenAddressValid_returnSuccess', async () => {
+  test('find_whenAddressValid_returnSuccess', async () => {
     const repository = TestDataSource.getRepository(AddressEntity);
 
     await repository.save({
@@ -54,7 +54,7 @@ describe('AddressRepository tests', () => {
     expect(address[0]).toHaveProperty('zip');
     expect(address[0].city).toBe('São Paulo');
   });
-  it('findAll_ findAllAdresses_returnSuccess', async () => {
+  test('findAll_ findAllAdresses_returnSuccess', async () => {
     const repository = TestDataSource.getRepository(AddressEntity);
 
     await repository.save({

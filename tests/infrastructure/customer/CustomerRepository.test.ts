@@ -21,7 +21,7 @@ describe('CustomerRepository tests', () => {
     await TestDataSource.destroy();
   });
 
-  it('save_whenCustomerValid_returnSuccess', async () => {
+  test('save_whenCustomerValid_returnSuccess', async () => {
     const repositoryCustomer = TestDataSource.getRepository(CustomerEntity);
     const repositoryAddress = TestDataSource.getRepository(AddressEntity);
 
@@ -43,7 +43,7 @@ describe('CustomerRepository tests', () => {
     expect(customer.name).toBe('Customer test');
     expect(customer).toHaveProperty('id');
   });
-  it('find_whenCustomerValid_returnSuccess', async () => {
+  test('find_whenCustomerValid_returnSuccess', async () => {
     const repositoryCustomer = TestDataSource.getRepository(CustomerEntity);
     const repositoryAddress = TestDataSource.getRepository(AddressEntity);
 
@@ -67,7 +67,7 @@ describe('CustomerRepository tests', () => {
     expect(customer[0].name).toBe('Customer test');
     expect(customer[0]).toHaveProperty('id');
   });
-  it('findAll_findAllCustomers_returnSuccess', async () => {
+  test('findAll_findAllCustomers_returnSuccess', async () => {
     const repositoryCustomer = TestDataSource.getRepository(CustomerEntity);
     const repositoryAddress = TestDataSource.getRepository(AddressEntity);
 

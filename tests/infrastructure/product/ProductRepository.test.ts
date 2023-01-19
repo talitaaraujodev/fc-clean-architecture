@@ -21,7 +21,7 @@ describe('ProductRepository tests', () => {
     await TestDataSource.destroy();
   });
 
-  it('save_whenProductValid_returnSuccess', async () => {
+  test('save_whenProductValid_returnSuccess', async () => {
     const repository = TestDataSource.getRepository(ProductEntity);
 
     const product = await repository.save({
@@ -34,7 +34,7 @@ describe('ProductRepository tests', () => {
     expect(product.price).toBe(10);
     expect(product).toHaveProperty('id');
   });
-  it('find_whenProductValid_returnSuccess', async () => {
+  test('find_whenProductValid_returnSuccess', async () => {
     const repository = TestDataSource.getRepository(ProductEntity);
 
     await repository.save({
@@ -48,7 +48,7 @@ describe('ProductRepository tests', () => {
     expect(product[0].price).toBe(10);
     expect(product[0]).toHaveProperty('id');
   });
-  it('findAll_ findAllProducts_returnSuccess', async () => {
+  test('findAll_ findAllProducts_returnSuccess', async () => {
     const repository = TestDataSource.getRepository(ProductEntity);
 
     await repository.save({
