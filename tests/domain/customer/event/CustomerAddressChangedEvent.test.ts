@@ -1,9 +1,9 @@
-import { EventDispatcher } from '../../@shared/event/EventDispatcher';
-import { CustomerAddressChangedEvent } from './CustomerAddressChangedEvent';
-import { SendConsoleLogHandler } from './handler/SendConsoleLogHandler';
+import { EventDispatcher } from '../../../../src/domain/@shared/event/EventDispatcher';
+import { CustomerAddressChangedEvent } from '../../../../src/domain/customer/event/CustomerAddressChangedEvent';
+import { SendConsoleLogHandler } from '../../../../src/domain/customer/event/handler/SendConsoleLogHandler';
 
 describe('Customer Address is Changed test', () => {
-  it('should call the 2 handlers when a customer is created', () => {
+  test('should call the 2 handlers when a customer is created', () => {
     const eventDispatcher = new EventDispatcher();
     const eventHandler = new SendConsoleLogHandler();
     const spyEventHandler = jest.spyOn(eventHandler, 'handle');

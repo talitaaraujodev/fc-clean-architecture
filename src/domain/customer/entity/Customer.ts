@@ -1,7 +1,7 @@
 import { Address } from '../valueObject/Address';
 
 export class Customer {
-  private id: number;
+  private id: number ;
   private name: string = '';
   private address!: Address;
   private active: number = 1;

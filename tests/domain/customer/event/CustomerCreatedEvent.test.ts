@@ -1,9 +1,9 @@
-import { EventDispatcher } from "../../@shared/event/EventDispatcher";
-import { CustomerCreatedEvent } from "./CustomerCreatedEvent";
-import { SendConsoleLog1Handler } from "./handler/SendConsoleLog1Handler";
+import { EventDispatcher } from "../../../../src/domain/@shared/event/EventDispatcher";
+import { CustomerCreatedEvent } from "../../../../src/domain/customer/event/CustomerCreatedEvent";
+import { SendConsoleLog1Handler } from "../../../../src/domain/customer/event/handler/SendConsoleLog1Handler";
 
 describe("Customer event created test", () => {
-  it("should handler when a customer is created", () => {
+  test("should handler when a customer is created", () => {
     const eventDispatcher = new EventDispatcher();
     const eventHandler = new SendConsoleLog1Handler();
     const spyEventHandler = jest.spyOn(eventHandler, "handle");
