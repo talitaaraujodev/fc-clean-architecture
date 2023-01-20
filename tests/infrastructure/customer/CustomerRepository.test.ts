@@ -1,3 +1,4 @@
+import { OrderItemsEntity } from './../../../src/infrastructure/order/repository/typeorm/OrderItemEntity';
 import { AddressEntity } from '../../../src/infrastructure/customer/repository/typeorm/AddressEntity';
 import { ProductEntity } from './../../../src/infrastructure/product/repository/typeorm/ProductEntity';
 import { OrderEntity } from './../../../src/infrastructure/order/repository/typeorm/OrderEntity';
@@ -9,7 +10,7 @@ describe('CustomerRepository tests', () => {
     type: 'sqlite',
     database: ':memory:',
     dropSchema: true,
-    entities: [AddressEntity, CustomerEntity, OrderEntity, ProductEntity],
+    entities: [AddressEntity, CustomerEntity, OrderEntity,OrderItemsEntity ,ProductEntity],
     synchronize: true,
     logging: false,
   });
@@ -28,18 +29,18 @@ describe('CustomerRepository tests', () => {
 
   test('create_whenCustomerValid_returnSuccess', async () => {
     await repositoryAddress.save({
-      id: 1,
+      id: '1',
       street: 'Rua ABC',
       number: 123,
       zip: '15220-250',
       city: 'São Paulo',
     });
     const customer = await repositoryCustomer.save({
-      id: 1,
+      id: '123',
       name: 'Customer test',
       active: 2,
       rewardPoints: 0,
-      addressId: 1,
+      addressId: '1',
     });
 
     expect(customer.name).toBe('Customer test');
@@ -50,7 +51,7 @@ describe('CustomerRepository tests', () => {
     const repositoryAddress = TestDataSource.getRepository(AddressEntity);
 
     await repositoryAddress.save({
-      id: 1,
+      id: '1',
       street: 'Rua ABC',
       number: 123,
       zip: '15220-250',
@@ -58,13 +59,13 @@ describe('CustomerRepository tests', () => {
     });
 
     await repositoryCustomer.save({
-      id: 1,
+      id: '123',
       name: 'Customer test',
       active: 2,
       rewardPoints: 0,
-      addressId: 1,
+      addressId: '1',
     });
-    const customer: any = await repositoryCustomer.findBy({ id: 1 });
+    const customer: any = await repositoryCustomer.findBy({ id: '123' });
 
     expect(customer[0].name).toBe('Customer test');
     expect(customer[0]).toHaveProperty('id');
@@ -74,7 +75,7 @@ describe('CustomerRepository tests', () => {
     const repositoryAddress = TestDataSource.getRepository(AddressEntity);
 
     await repositoryAddress.save({
-      id: 1,
+      id: '1',
       street: 'Rua ABC',
       number: 123,
       zip: '15220-250',
@@ -82,7 +83,7 @@ describe('CustomerRepository tests', () => {
     });
 
     await repositoryCustomer.save({
-      id: 1,
+      id: '123',
       name: 'Customer test',
       active: 2,
       rewardPoints: 0,
@@ -99,7 +100,7 @@ describe('CustomerRepository tests', () => {
     const repositoryAddress = TestDataSource.getRepository(AddressEntity);
 
     await repositoryAddress.save({
-      id: 1,
+      id: '1',
       street: 'Rua ABC',
       number: 123,
       zip: '15220-250',
@@ -107,10 +108,10 @@ describe('CustomerRepository tests', () => {
     });
 
     await repositoryCustomer.save({
-      id: 1,
+      id: '123',
       name: 'Customer test',
     });
-    const customer: any = await repositoryCustomer.findBy({ id: 1 });
+    const customer: any = await repositoryCustomer.findBy({ id: '123' });
 
     const customerEntityUpdate: any = await repositoryCustomer.save({
       id: customer[0].id,
@@ -124,7 +125,7 @@ describe('CustomerRepository tests', () => {
     const repositoryAddress = TestDataSource.getRepository(AddressEntity);
 
     const address = await repositoryAddress.save({
-      id: 1,
+      id: '1',
       street: 'Rua ABC',
       number: 123,
       zip: '15220-250',
@@ -140,13 +141,13 @@ describe('CustomerRepository tests', () => {
     const repositoryAddress = TestDataSource.getRepository(AddressEntity);
 
     await repositoryAddress.save({
-      id: 1,
+      id: '1',
       street: 'Rua ABC',
       number: 123,
       zip: '15220-250',
       city: 'São Paulo',
     });
-    const address: any = await repositoryAddress.findBy({ id: 1 });
+    const address: any = await repositoryAddress.findBy({ id: '1' });
 
     const addressEntityUpdate: any = await repositoryAddress.save({
       id: address[0].id,

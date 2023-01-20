@@ -1,3 +1,5 @@
+import { OrderItemsEntity } from './../../../src/infrastructure/order/repository/typeorm/OrderItemEntity';
+import { v4 as uuid } from 'uuid';
 import { ProductEntity } from './../../../src/infrastructure/product/repository/typeorm/ProductEntity';
 import { OrderEntity } from './../../../src/infrastructure/order/repository/typeorm/OrderEntity';
 import { CustomerEntity } from './../../../src/infrastructure/customer/repository/typeorm/CustomerEntitiy';
@@ -9,7 +11,13 @@ describe('ProductRepository tests', () => {
     type: 'sqlite',
     database: ':memory:',
     dropSchema: true,
-    entities: [AddressEntity, CustomerEntity, OrderEntity, ProductEntity],
+    entities: [
+      AddressEntity,
+      CustomerEntity,
+      OrderEntity,
+      OrderItemsEntity,
+      ProductEntity,
+    ],
     synchronize: true,
     logging: false,
   });
@@ -26,7 +34,7 @@ describe('ProductRepository tests', () => {
 
   test('create_whenProductValid_returnSuccess', async () => {
     const product = await productRepository.save({
-      id: 1,
+      id: '123',
       name: 'Product test',
       price: 10,
     });
@@ -37,11 +45,11 @@ describe('ProductRepository tests', () => {
   });
   test('find_whenProductValid_returnSuccess', async () => {
     await productRepository.save({
-      id: 1,
+      id: '123',
       name: 'Product test',
       price: 10,
     });
-    const product: any = await productRepository.findBy({ id: 1 });
+    const product: any = await productRepository.findBy({ id: '123' });
 
     expect(product[0].name).toBe('Product test');
     expect(product[0].price).toBe(10);
@@ -49,7 +57,7 @@ describe('ProductRepository tests', () => {
   });
   test('findAll_findAllProducts_returnSuccess', async () => {
     await productRepository.save({
-      id: 1,
+      id: '123',
       name: 'Product test',
       price: 10,
     });
@@ -61,11 +69,11 @@ describe('ProductRepository tests', () => {
 
   test('update_whenProductValid_returnSuccess', async () => {
     await productRepository.save({
-      id: 1,
+      id: '123',
       name: 'Product test',
       price: 10,
     });
-    const product: any = await productRepository.findBy({ id: 1 });
+    const product: any = await productRepository.findBy({ id: '123' });
 
     const productEntityUpdate: any = await productRepository.save({
       id: product[0].id,

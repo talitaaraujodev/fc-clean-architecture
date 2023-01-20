@@ -11,7 +11,7 @@ describe('Customerfactory tests', () => {
   });
 
   test('should create a customer with an address', () => {
-    const address = new Address(1, 'Street', 1, '13330-250', 'São Paulo');
+    const address = new Address('Street', 1, '13330-250', 'São Paulo');
 
     const customer = CustomerFactory.createWithAddress('John', address);
 
