@@ -1,21 +1,21 @@
 export class OrderItem {
-  private id: number;
-  private productId: number;
+  private id: string;
+  private productId: string;
   private price: number;
   private quantity: number;
 
-  constructor(id: number, price: number, productId: number, quantity: number) {
+  constructor(id: string, price: number, productId: string, quantity: number) {
     this.id = id;
     this.price = price;
     this.productId = productId;
     this.quantity = quantity;
   }
 
-  get getId(): number {
+  get getId(): string {
     return this.id;
   }
 
-  get getProductId(): number {
+  get getProductId(): string {
     return this.productId;
   }
 

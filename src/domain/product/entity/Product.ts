@@ -1,16 +1,16 @@
 export class Product {
-  private id: number;
+  private id: string;
   private name: string;
   private price: number;
 
-  constructor(id: number, name: string, price: number) {
+  constructor(id: string, name: string, price: number) {
     this.id = id;
     this.name = name;
     this.price = price;
     this.validate();
   }
 
-  get getId(): number {
+  get getId(): string {
     return this.id;
   }
 

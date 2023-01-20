@@ -1,12 +1,12 @@
 import { OrderItem } from './OrderItem';
-
+import { v4 as uuid } from 'uuid';
 export class Order {
-  private id: number;
-  private customerId: number;
+  private id: string;
+  private customerId: string;
   private items: OrderItem[];
   private total: number;
 
-  constructor(id: number, customerId: number, items: OrderItem[]) {
+  constructor(id: string, customerId: string, items: OrderItem[]) {
     this.id = id;
     this.customerId = customerId;
     this.items = items;
@@ -14,15 +14,15 @@ export class Order {
     this.validate();
   }
 
-  static createToSaved(customerId: number, items: OrderItem[]): Order {
-    return new Order(0, customerId, items);
+  static createToSaved(customerId: string, items: OrderItem[]): Order {
+    return new Order(uuid(), customerId, items);
   }
 
-  get getId(): number {
+  get getId(): string {
     return this.id;
   }
 
-  get getCustomerId(): number {
+  get getCustomerId(): string {
     return this.customerId;
   }
 
@@ -31,7 +31,10 @@ export class Order {
   }
 
   validate(): boolean {
-    if (this.customerId === 0) {
+    if (this.id === '') {
+      throw new Error('Id é um campo obrigatório');
+    }
+    if (this.customerId === '') {
       throw new Error('CustomerId é um campo obrigatório');
     }
     if (this.items.length === 0) {

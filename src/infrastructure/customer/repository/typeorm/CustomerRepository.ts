@@ -1,23 +1,28 @@
-import { Address } from 'domain/customer/valueObject/Address';
+import { Repository } from 'typeorm';
+import { Address } from '../../../../domain/customer/valueObject/Address';
 import { Customer } from '../../../../domain/customer/entity/Customer';
 import { ICustomerRepository } from 'domain/customer/repository/ICustomerRepository';
 import { AppDataSource } from '../../../database/ormconfig';
 import { CustomerEntity } from './CustomerEntitiy';
-import { AddressEntity } from 'infrastructure/customer/repository/typeorm/AddressEntity';
+import { AddressEntity } from '../../../../infrastructure/customer/repository/typeorm/AddressEntity';
 
 export class CustomerRepository implements ICustomerRepository {
-  private readonly repositoryCustomer =
+  private readonly repositoryCustomer: Repository<CustomerEntity> =
     AppDataSource.getRepository(CustomerEntity);
 
-  private readonly repositoryAddress =
+  private readonly repositoryAddress: Repository<AddressEntity> =
     AppDataSource.getRepository(AddressEntity);
 
   async create(customer: Customer): Promise<Customer> {
+    const addressEntityCreated: any = await this.createAddress(
+      customer.getAddress
+    );
+
     const customerEntitySaved: any = await this.repositoryCustomer.save({
       name: customer.getName,
       active: customer.isActive,
       rewardPoints: customer.getRewardPoints,
-      addressId: customer.getAddress.getId,
+      addressId: addressEntityCreated.id,
     });
     return new Customer(customerEntitySaved.id, customer.getName);
   }
@@ -29,12 +34,11 @@ export class CustomerRepository implements ICustomerRepository {
       name: customer.getName,
       active: customer.isActive,
       rewardPoints: customer.getRewardPoints,
-      addressId: customer.getAddress.getId,
     });
     return new Customer(customerEntityUpdate.id, customer.getName);
   }
 
-  async find(id: number): Promise<Customer> {
+  async find(id: string): Promise<Customer> {
     const product: any = await this.repositoryCustomer.findOneBy({ id });
     return new Customer(product.id, product.name);
   }
@@ -44,14 +48,13 @@ export class CustomerRepository implements ICustomerRepository {
   }
 
   async createAddress(address: Address): Promise<Address> {
-    const addressEntitySaved: any = await this.repositoryAddress.save({
+    await this.repositoryAddress.save({
       street: address.getStreet,
       number: address.getNumber,
       zip: address.getZip,
       city: address.getCity,
     });
     return new Address(
-      addressEntitySaved.id,
       address.getStreet,
       address.getNumber,
       address.getZip,
@@ -59,17 +62,15 @@ export class CustomerRepository implements ICustomerRepository {
     );
   }
 
-  async updateAddress(address: Address): Promise<Address> {
-    await this.find(address.getId);
-    const addressEntityUpdate: any = await this.repositoryAddress.save({
-      id: address.getId,
+  async updateAddress(address: Address, id: string): Promise<Address> {
+    await this.repositoryAddress.save({
       street: address.getStreet,
       number: address.getNumber,
       zip: address.getZip,
       city: address.getCity,
+      customers: [{ id }],
     });
     return new Address(
-      addressEntityUpdate.id,
       address.getStreet,
       address.getNumber,
       address.getZip,

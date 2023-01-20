@@ -3,8 +3,8 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity('addresses')
 export class AddressEntity {
-  @PrimaryGeneratedColumn('increment')
-  id: number | null;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   street: string;

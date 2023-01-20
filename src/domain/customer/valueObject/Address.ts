@@ -1,29 +1,17 @@
 // value object
 export class Address {
-  private id: number;
   private street: string = '';
   private number: number = 0;
   private zip: string = '';
   private city: string = '';
 
-  constructor(
-    id: number,
-    street: string,
-    number: number,
-    zip: string,
-    city: string
-  ) {
-    this.id = id;
+  constructor(street: string, number: number, zip: string, city: string) {
     this.street = street;
     this.number = number;
     this.zip = zip;
     this.city = city;
 
     this.validate();
-  }
-
-  get getId(): number {
-    return this.id;
   }
 
   get getStreet(): string {

@@ -1,19 +1,19 @@
 import { Address } from '../valueObject/Address';
 
 export class Customer {
-  private id: number;
+  private id: string;
   private name: string = '';
   private address!: Address;
   private active: number = 1;
   private rewardPoints: number = 0;
 
-  constructor(id: number, name: string) {
+  constructor(id: string, name: string) {
     this.id = id;
     this.name = name;
     this.validate();
   }
 
-  get getId(): number {
+  get getId(): string {
     return this.id;
   }
 
@@ -26,6 +26,9 @@ export class Customer {
   }
 
   validate() {
+    if (this.id === '') {
+      throw new Error('Id é um campo obrigatório');
+    }
     if (this.name.length === 0) {
       throw new Error('Name é um campo obrigatório');
     }

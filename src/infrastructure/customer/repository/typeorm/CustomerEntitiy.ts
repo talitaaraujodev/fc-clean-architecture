@@ -11,8 +11,8 @@ import {
 
 @Entity('customers')
 export class CustomerEntity {
-  @PrimaryGeneratedColumn('increment')
-  id: number | null;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   name: string;
@@ -28,6 +28,5 @@ export class CustomerEntity {
   rewardPoints: number;
 
   @OneToMany(() => OrderEntity, (order) => order.customer)
-  @JoinColumn({ name: 'customerId' })
   orders: OrderEntity[];
 }

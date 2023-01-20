@@ -1,3 +1,4 @@
+import { OrderItemsEntity } from './OrderItemEntity';
 import { ProductEntity } from './../../../product/repository/typeorm/ProductEntity';
 import { CustomerEntity } from '../../../customer/repository/typeorm/CustomerEntitiy';
 import {
@@ -5,24 +6,22 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-  ManyToMany,
-  JoinTable,
+  JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity('orders')
 export class OrderEntity {
-  @PrimaryGeneratedColumn('increment')
-  id: number | null;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-  @ManyToOne(() => CustomerEntity, (customer) => customer.orders)
+  @ManyToOne(() => CustomerEntity, (address) => address.orders)
+  @JoinColumn({ name: 'customerId' })
   customer: CustomerEntity;
+
+  @OneToMany(() => OrderItemsEntity, (orderItems) => orderItems.orders)
+  orderItems: OrderItemsEntity[];
 
   @Column()
   total: number;
-
-  @ManyToMany(() => ProductEntity)
-  @JoinTable({
-    name: 'order_items',
-  })
-  products: ProductEntity[];
 }

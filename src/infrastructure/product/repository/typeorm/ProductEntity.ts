@@ -1,9 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { OrderItemsEntity } from '../../../order/repository/typeorm/OrderItemEntity';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity('products')
 export class ProductEntity {
-  @PrimaryGeneratedColumn('increment')
-  id: number | null;
+  @PrimaryGeneratedColumn('uuid')
+  id: string | null;
 
   @Column()
   name: string;
@@ -11,7 +12,10 @@ export class ProductEntity {
   @Column()
   price: number;
 
-  constructor(id: number | null, name: string, price: number) {
+  @OneToMany(() => OrderItemsEntity, (orderItems) => orderItems.products)
+  orderItems: OrderItemsEntity[];
+
+  constructor(id: string | null, name: string, price: number) {
     this.id = id;
     this.name = name;
     this.price = price;

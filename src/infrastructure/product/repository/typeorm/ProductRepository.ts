@@ -2,9 +2,11 @@ import { ProductEntity } from 'infrastructure/product/repository/typeorm/Product
 import { AppDataSource } from 'infrastructure/database/ormconfig';
 import { Product } from '../../../../domain/product/entity/Product';
 import { IProductRepository } from '../../../../domain/product/repository/IProductRepository';
+import { Repository } from 'typeorm';
 
 export default class ProductRepository implements IProductRepository {
-  private readonly repository = AppDataSource.getRepository(ProductEntity);
+  private readonly repository: Repository<ProductEntity> =
+    AppDataSource.getRepository(ProductEntity);
 
   async create(product: Product): Promise<Product | null> {
     const productEntitySaved: any = await this.repository.save(
@@ -17,7 +19,7 @@ export default class ProductRepository implements IProductRepository {
     );
   }
 
-  async find(id: number): Promise<Product> {
+  async find(id: string): Promise<Product> {
     const product: any = await this.repository.findOneBy({ id });
     return new Product(product.id, product.name, product.price);
   }

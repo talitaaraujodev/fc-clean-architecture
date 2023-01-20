@@ -4,6 +4,7 @@ import { OrderEntity } from '../order/repository/typeorm/OrderEntity';
 import { CustomerEntity } from '../customer/repository/typeorm/CustomerEntitiy';
 import { AddressEntity } from '../customer/repository/typeorm/AddressEntity';
 import { ProductEntity } from '../product/repository/typeorm/ProductEntity';
+import { OrderItemsEntity } from '../order/repository/typeorm/OrderItemEntity';
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
@@ -14,5 +15,11 @@ export const AppDataSource = new DataSource({
   database: 'clean_architecture',
   synchronize: true,
   logging: true,
-  entities: [ProductEntity, AddressEntity, CustomerEntity, OrderEntity],
+  entities: [
+    ProductEntity,
+    AddressEntity,
+    CustomerEntity,
+    OrderEntity,
+    OrderItemsEntity,
+  ],
 });
