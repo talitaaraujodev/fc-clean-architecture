@@ -1,6 +1,7 @@
-import { EventInterface } from "./EventInterface";
+import { EventInterface } from './EventInterface';
 
-export interface EventHandlerInterface<T extends EventInterface=EventInterface> {
-    handle(event: T): void;
-
+export interface EventHandlerInterface<
+  T extends EventInterface = EventInterface
+> {
+  handle(event: T): void;
 }

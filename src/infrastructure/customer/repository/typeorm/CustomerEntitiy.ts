@@ -1,5 +1,5 @@
 import { OrderEntity } from './../../../order/repository/typeorm/OrderEntity';
-import { AddressEntity } from './../../../address/repository/typeorm/AddressEntity';
+import { AddressEntity } from './AddressEntity';
 import {
   Entity,
   PrimaryGeneratedColumn,

@@ -1,8 +1,8 @@
-import { EventHandlerInterface } from "../../../@shared/event/EventHandlerInterface";
-import { CustomerAddressChangedEvent } from "../CustomerAddressChangedEvent";
+import { EventHandlerInterface } from '../../../@shared/event/EventHandlerInterface';
+import { CustomerAddressChangedEvent } from '../CustomerAddressChangedEvent';
 
-//Desafio FC sobre Domain Events
-export  class SendConsoleLogHandler
+// Desafio FC sobre Domain Events
+export class SendConsoleLogHandler
   implements EventHandlerInterface<CustomerAddressChangedEvent>
 {
   handle({ eventData }: CustomerAddressChangedEvent): void {

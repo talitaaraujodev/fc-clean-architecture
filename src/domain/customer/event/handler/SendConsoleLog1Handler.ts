@@ -1,8 +1,8 @@
-import { EventHandlerInterface } from "../../../@shared/event/EventHandlerInterface";
-import { CustomerCreatedEvent } from "../CustomerCreatedEvent";
+import { EventHandlerInterface } from '../../../@shared/event/EventHandlerInterface';
+import { CustomerCreatedEvent } from '../CustomerCreatedEvent';
 
-//Desafio FC sobre Domain Events
-//Crie 2 handlers exibindo um "console.log".
+// Desafio FC sobre Domain Events
+// Crie 2 handlers exibindo um "console.log".
 export class SendConsoleLog1Handler
   implements EventHandlerInterface<CustomerCreatedEvent>
 {

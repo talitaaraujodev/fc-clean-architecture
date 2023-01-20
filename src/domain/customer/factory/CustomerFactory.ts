@@ -1,5 +1,5 @@
-import { Customer } from "../entity/Customer";
-import { Address } from "../valueObject/Address";
+import { Customer } from '../entity/Customer';
+import { Address } from '../valueObject/Address';
 
 export class CustomerFactory {
   public static create(name: string): Customer {

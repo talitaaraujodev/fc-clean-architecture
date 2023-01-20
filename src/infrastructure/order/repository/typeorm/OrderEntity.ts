@@ -22,7 +22,7 @@ export class OrderEntity {
 
   @ManyToMany(() => ProductEntity)
   @JoinTable({
-    name: 'order_products',
+    name: 'order_items',
   })
   products: ProductEntity[];
 }
