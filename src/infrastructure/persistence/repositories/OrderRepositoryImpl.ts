@@ -1,10 +1,10 @@
-import { OrderEntity } from './OrderEntity';
-import { AppDataSource } from '../../../database/ormconfig';
-import { Order } from '../../../../domain/checkout/entity/Order';
-import { IOrderRepository } from 'domain/checkout/repository/IOrderRepository';
 import { Repository } from 'typeorm';
+import { OrderEntity } from '../entities/OrderEntity';
+import { AppDataSource } from '../../config/database/ormconfig';
+import { Order } from '../../../domain/checkout/model/Order';
+import { OrderRepository } from 'domain/checkout/repository/IOrderRepository';
 
-export class OrderRepository implements IOrderRepository {
+export class OrderRepositoryImpl implements OrderRepository {
   private readonly orderRepository: Repository<OrderEntity> =
     AppDataSource.getRepository(OrderEntity);
 

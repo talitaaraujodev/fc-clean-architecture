@@ -1,4 +1,4 @@
-import { OrderEntity } from './../../../order/repository/typeorm/OrderEntity';
+import { OrderEntity } from './OrderEntity';
 import { AddressEntity } from './AddressEntity';
 import {
   Entity,

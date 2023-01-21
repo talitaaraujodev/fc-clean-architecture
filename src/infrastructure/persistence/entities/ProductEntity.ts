@@ -1,4 +1,4 @@
-import { OrderItemsEntity } from '../../../order/repository/typeorm/OrderItemEntity';
+import { OrderItemsEntity } from './OrderItemEntity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity('products')

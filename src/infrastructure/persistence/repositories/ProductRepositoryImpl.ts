@@ -1,10 +1,10 @@
-import { ProductEntity } from 'infrastructure/product/repository/typeorm/ProductEntity';
-import { AppDataSource } from 'infrastructure/database/ormconfig';
-import { Product } from '../../../../domain/product/entity/Product';
-import { IProductRepository } from '../../../../domain/product/repository/IProductRepository';
 import { Repository } from 'typeorm';
+import { ProductEntity } from '../../../infrastructure/persistence/entities/ProductEntity';
+import { AppDataSource } from '../../../infrastructure/config/database/ormconfig';
+import { Product } from '../../../domain/product/model/Product';
+import { ProductRepository } from '../../../domain/product/repository/IProductRepository';
 
-export default class ProductRepository implements IProductRepository {
+export default class ProductRepositoryImpl implements ProductRepository {
   private readonly repository: Repository<ProductEntity> =
     AppDataSource.getRepository(ProductEntity);
 

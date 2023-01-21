@@ -1,10 +1,10 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
-import { OrderEntity } from '../../order/repository/typeorm/OrderEntity';
-import { CustomerEntity } from '../../customer/repository/typeorm/CustomerEntitiy';
-import { AddressEntity } from '../../customer/repository/typeorm/AddressEntity';
-import { ProductEntity } from '../../product/repository/typeorm/ProductEntity';
-import { OrderItemsEntity } from '../../order/repository/typeorm/OrderItemEntity';
+import { OrderEntity } from '../../persistence/entities/OrderEntity';
+import { CustomerEntity } from '../../persistence/entities/CustomerEntitiy';
+import { AddressEntity } from '../../persistence/entities/AddressEntity';
+import { ProductEntity } from '../../persistence/entities/ProductEntity';
+import { OrderItemsEntity } from '../../persistence/entities/OrderItemEntity';
 import env from '../env';
 
 export const AppDataSource = new DataSource({

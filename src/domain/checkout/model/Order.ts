@@ -1,5 +1,6 @@
 import { OrderItem } from './OrderItem';
 import { v4 as uuid } from 'uuid';
+import { ValidationError } from '../../../utils/errors/ValidationError';
 export class Order {
   private id: string;
   private customerId: string;
@@ -32,17 +33,17 @@ export class Order {
 
   validate(): boolean {
     if (this.id === '') {
-      throw new Error('Id é um campo obrigatório');
+      throw new ValidationError('Id é um campo obrigatório');
     }
     if (this.customerId === '') {
-      throw new Error('CustomerId é um campo obrigatório');
+      throw new ValidationError('CustomerId é um campo obrigatório');
     }
     if (this.items.length === 0) {
-      throw new Error('Items é um campo obrigatório');
+      throw new ValidationError('Items é um campo obrigatório');
     }
 
     if (this.items.some((item) => item.getQuantity <= 0)) {
-      throw new Error('Quantity deve ser maior que zero');
+      throw new ValidationError('Quantity deve ser maior que zero');
     }
 
     return true;

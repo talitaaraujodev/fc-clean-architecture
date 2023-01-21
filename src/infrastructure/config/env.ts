@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 export = {
   serverPort: Number(process.env.SERVER_PORT) || 9003,
   dbName: process.env.PG_DATABASE || 'clean_architecture',

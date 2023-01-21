@@ -1,6 +1,6 @@
-import { Customer } from '../entity/Customer';
+import { Customer } from '../model/Customer';
 
-export interface ICustomerRepository {
+export interface CustomerRepository {
   create(customer: Customer): Promise<Customer>;
   update(customer: Customer): Promise<Customer>;
   find(id: string): Promise<Customer>;

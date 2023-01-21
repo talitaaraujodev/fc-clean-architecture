@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
-import { Customer } from '../../../../src/domain/customer/entity/Customer';
-import { Order } from '../../../../src/domain/checkout/entity/Order';
-import { OrderItem } from '../../../../src/domain/checkout/entity/OrderItem';
+import { Customer } from '../../../../src/domain/customer/model/Customer';
+import { Order } from '../../../../src/domain/checkout/model/Order';
+import { OrderItem } from '../../../../src/domain/checkout/model/OrderItem';
 import { OrderService } from '../../../../src/domain/checkout/service/OrderService';
 
 describe('OrderService tests', () => {
@@ -10,7 +10,7 @@ describe('OrderService tests', () => {
     const item1 = new OrderItem(uuid(), 10, uuid(), 1);
     const order = OrderService.placeOrder(customer, [item1]);
 
-    expect(customer.getRewardPoints).toBe(5);
+    expect(customer.rewardPoints).toBe(5);
     expect(order.getTotal).toBe(10);
   });
   test('total_whenOrdersValid_returnTotal', () => {

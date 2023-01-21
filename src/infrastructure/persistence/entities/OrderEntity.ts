@@ -1,6 +1,6 @@
 import { OrderItemsEntity } from './OrderItemEntity';
-import { ProductEntity } from './../../../product/repository/typeorm/ProductEntity';
-import { CustomerEntity } from '../../../customer/repository/typeorm/CustomerEntitiy';
+import { ProductEntity } from './ProductEntity';
+import { CustomerEntity } from './CustomerEntitiy';
 import {
   Entity,
   PrimaryGeneratedColumn,

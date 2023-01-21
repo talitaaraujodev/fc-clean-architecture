@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { Product } from '../../../../src/domain/product/entity/Product';
+import { Product } from '../../../../src/domain/product/model/Product';
 import { ProductService } from '../../../../src/domain/product/service/ProductService';
 
 describe('Product service unit tests', () => {

@@ -1,6 +1,6 @@
-import { Product } from '../entity/Product';
+import { Product } from '../model/Product';
 
-export interface IProductRepository {
+export interface ProductRepository {
   create(product: Product): Promise<Product | null>;
   update(product: Product): Promise<Product | null>;
   find(id: string): Promise<Product | null>;

@@ -1,12 +1,12 @@
 import { Address } from './../../../src/domain/customer/valueObject/Address';
-import { OrderItem } from './../../../src/domain/checkout/entity/OrderItem';
+import { OrderItem } from '../../../src/domain/checkout/model/OrderItem';
 import { DataSource, Repository } from 'typeorm';
-import { OrderItemsEntity } from './../../../src/infrastructure/order/repository/typeorm/OrderItemEntity';
-import { AddressEntity } from '../../../src/infrastructure/customer/repository/typeorm/AddressEntity';
-import { ProductEntity } from './../../../src/infrastructure/product/repository/typeorm/ProductEntity';
-import { OrderEntity } from './../../../src/infrastructure/order/repository/typeorm/OrderEntity';
-import { CustomerEntity } from './../../../src/infrastructure/customer/repository/typeorm/CustomerEntitiy';
-import { Order } from './../../../src/domain/checkout/entity/Order';
+import { OrderItemsEntity } from '../../../src/infrastructure/persistence/entities/OrderItemEntity';
+import { AddressEntity } from '../../../src/infrastructure/persistence/entities/AddressEntity';
+import { ProductEntity } from '../../../src/infrastructure/persistence/entities/ProductEntity';
+import { OrderEntity } from '../../../src/infrastructure/persistence/entities/OrderEntity';
+import { CustomerEntity } from '../../../src/infrastructure/persistence/entities/CustomerEntitiy';
+import { Order } from '../../../src/domain/checkout/model/Order';
 
 describe('OrderRepository tests', () => {
   const TestDataSource = new DataSource({

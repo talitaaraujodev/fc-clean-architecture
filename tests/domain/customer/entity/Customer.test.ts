@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import { Address } from '../../../../src/domain/customer/valueObject/Address';
-import { Customer } from '../../../../src/domain/customer/entity/Customer';
+import { Customer } from '../../../../src/domain/customer/model/Customer';
 describe('Customer tests', () => {
   test('validate_whenNameEmpty_returnError', () => {
     expect(() => {
@@ -12,7 +12,7 @@ describe('Customer tests', () => {
 
     customer.changeName('Jubileu');
 
-    expect(customer.getName).toBe('Jubileu');
+    expect(customer.name).toBe('Jubileu');
   });
   test('activate_whenProductActivate_returnSuccess', () => {
     const customer = new Customer(uuid(), 'Customer test');
@@ -39,12 +39,21 @@ describe('Customer tests', () => {
   });
   test('addRewardPoints_whenAddRewardPoints_returnSuccess', () => {
     const customer = new Customer(uuid(), 'Customer test');
-    expect(customer.getRewardPoints).toBe(0);
+    expect(customer.rewardPoints).toBe(0);
 
     customer.addRewardPoints(10);
-    expect(customer.getRewardPoints).toBe(10);
+    expect(customer.rewardPoints).toBe(10);
 
     customer.addRewardPoints(10);
-    expect(customer.getRewardPoints).toBe(20);
+    expect(customer.rewardPoints).toBe(20);
+  });
+  test('createToSaved_whenCustomerValid_returnSuccess', () => {
+    const address = new Address('Street', 1, '13330-250', 'São Paulo');
+
+    const customer = Customer.createToSaved('John', address);
+
+    expect(customer.id).toBeDefined();
+    expect(customer.name).toBe('John');
+    expect(customer.address).toBe(address);
   });
 });

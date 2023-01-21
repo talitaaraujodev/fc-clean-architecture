@@ -1,4 +1,4 @@
-import { Product } from '../../../../src/domain/product/entity/Product';
+import { Product } from '../../../../src/domain/product/model/Product';
 import { v4 as uuid } from 'uuid';
 describe('Product tests', () => {
   test('validate_whenNameEmpty_returnError', () => {

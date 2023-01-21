@@ -1,4 +1,4 @@
-import { ProductEntity } from '../../../product/repository/typeorm/ProductEntity';
+import { ProductEntity } from './ProductEntity';
 import { OrderEntity } from './OrderEntity';
 import {
   Column,

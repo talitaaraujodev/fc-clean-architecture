@@ -1,6 +1,6 @@
-import { OrderItem } from '../entity/OrderItem';
-import { Order } from '../entity/Order';
-import { Customer } from '../../customer/entity/Customer';
+import { OrderItem } from '../model/OrderItem';
+import { Order } from '../model/Order';
+import { Customer } from '../../customer/model/Customer';
 
 // service são Stateless
 export class OrderService {
@@ -12,7 +12,7 @@ export class OrderService {
     if (items.length === 0) {
       throw new Error('Order must have at least one item');
     }
-    const order = Order.createToSaved(customer.getId, items);
+    const order = Order.createToSaved(customer.id, items);
     customer.addRewardPoints(order.getTotal / 2);
     return order;
   }

@@ -1,8 +1,8 @@
-import { OrderItemsEntity } from './../../../src/infrastructure/order/repository/typeorm/OrderItemEntity';
-import { AddressEntity } from '../../../src/infrastructure/customer/repository/typeorm/AddressEntity';
-import { ProductEntity } from './../../../src/infrastructure/product/repository/typeorm/ProductEntity';
-import { OrderEntity } from './../../../src/infrastructure/order/repository/typeorm/OrderEntity';
-import { CustomerEntity } from './../../../src/infrastructure/customer/repository/typeorm/CustomerEntitiy';
+import { OrderItemsEntity } from '../../../src/infrastructure/persistence/entities/OrderItemEntity';
+import { AddressEntity } from '../../../src/infrastructure/persistence/entities/AddressEntity';
+import { ProductEntity } from '../../../src/infrastructure/persistence/entities/ProductEntity';
+import { OrderEntity } from '../../../src/infrastructure/persistence/entities/OrderEntity';
+import { CustomerEntity } from '../../../src/infrastructure/persistence/entities/CustomerEntitiy';
 import { DataSource, Repository } from 'typeorm';
 
 describe('CustomerRepository tests', () => {
@@ -10,7 +10,13 @@ describe('CustomerRepository tests', () => {
     type: 'sqlite',
     database: ':memory:',
     dropSchema: true,
-    entities: [AddressEntity, CustomerEntity, OrderEntity,OrderItemsEntity ,ProductEntity],
+    entities: [
+      AddressEntity,
+      CustomerEntity,
+      OrderEntity,
+      OrderItemsEntity,
+      ProductEntity,
+    ],
     synchronize: true,
     logging: false,
   });

@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
-import { Order } from '../../../../src/domain/checkout/entity/Order';
-import { OrderItem } from '../../../../src/domain/checkout/entity/OrderItem';
+import { Order } from '../../../../src/domain/checkout/model/Order';
+import { OrderItem } from '../../../../src/domain/checkout/model/OrderItem';
 describe('Order tests', () => {
   test('validate_whenCustomerIdEmpty_returnError', () => {
     expect(() => {
