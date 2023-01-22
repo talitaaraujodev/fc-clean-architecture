@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import { Address } from './../../../domain/customer/valueObject/Address';
 import { Customer } from '../../../domain/customer/model/Customer';
-import { CustomerRepository } from './../../../domain/customer/repository/ICustomerRepository';
+import { CustomerRepository } from '../../../domain/customer/repository/CustomerRepository';
 import { CustomerUsecaseInput } from './CustomerUsecaseInput';
 import {
   InputCreateCustomerDto,
@@ -39,7 +39,6 @@ export class CustomerUsecase implements CustomerUsecaseInput {
 
   async findOne(id: string): Promise<OutputFindOneCustomerDto> {
     const customer = await this.customerRepository.find(id);
-
     return {
       id: customer.id,
       name: customer.name,
@@ -53,16 +52,17 @@ export class CustomerUsecase implements CustomerUsecaseInput {
   }
 
   async findAll(): Promise<OutputListCustomerDto> {
-    const customers = await this.customerRepository.findAll();
+    const customers: Customer[] = await this.customerRepository.findAll();
+
     return {
       customers: customers.map((customer: any) => ({
         id: customer.id,
         name: customer.name,
         address: {
-          street: customer.Address.street,
-          number: customer.Address.number,
-          zip: customer.Address.zip,
-          city: customer.Address.city,
+          street: customer.address.street,
+          number: customer.address.number,
+          zip: customer.address.zip,
+          city: customer.address.city,
         },
       })),
     };

@@ -71,10 +71,13 @@ describe('CustomerRepository tests', () => {
       rewardPoints: 0,
       addressId: '1',
     });
-    const customer: any = await repositoryCustomer.findBy({ id: '123' });
+    const customer: any = await repositoryCustomer.findOne({
+      where: { id: '123' },
+      relations: ['address'],
+    });
 
-    expect(customer[0].name).toBe('Customer test');
-    expect(customer[0]).toHaveProperty('id');
+    expect(customer.name).toBe('Customer test');
+    expect(customer).toHaveProperty('id');
   });
   test('findAll_findAllCustomers_returnSuccess', async () => {
     const repositoryCustomer = TestDataSource.getRepository(CustomerEntity);

@@ -13,10 +13,10 @@ export class OrderItemsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string | null;
 
-  @Column()
+  @Column({ nullable: false })
   ordersId: string;
 
-  @Column()
+  @Column({ nullable: false })
   productsId: string;
 
   @Column()
