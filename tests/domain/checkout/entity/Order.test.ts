@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { v4 as uuid } from 'uuid';
 import { Order } from '../../../../src/domain/checkout/model/Order';
 import { OrderItem } from '../../../../src/domain/checkout/model/OrderItem';

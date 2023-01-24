@@ -1,5 +1,4 @@
 import { OrderItemsEntity } from './OrderItemEntity';
-import { ProductEntity } from './ProductEntity';
 import { CustomerEntity } from './CustomerEntitiy';
 import {
   Entity,

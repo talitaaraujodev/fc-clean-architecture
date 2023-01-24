@@ -1,14 +1,11 @@
 import { Request, Response } from 'express';
-import { inject, injectable } from 'tsyringe';
 import { ValidationError } from '../../utils/errors/ValidationError';
-import { CustomerUsecaseInput } from './../../application/usecase/customer/CustomerUsecaseInput';
+import GetCustomerUsecase from '../../application/usecase/customer/GetCustomerUsecase';
+import UpdateCustomerUsecase from '../../application/usecase/customer/UpdateCustomerUsecase';
+import CreateCustomerUsecase from '../../application/usecase/customer/CreateCustomerUsecase';
 
-@injectable()
 export default class CustomerController {
-  constructor(
-    @inject('CustomerUseCaseInput')
-    private readonly customerUsecase: CustomerUsecaseInput
-  ) {}
+  constructor() {}
 
   async create(request: Request, response: Response): Promise<Response> {
     try {
@@ -21,7 +18,8 @@ export default class CustomerController {
           zip: request.body.address.zip,
         },
       };
-      const customer = await this.customerUsecase.create(customerDto);
+
+      const customer = await CreateCustomerUsecase.create(customerDto);
       return response.json(customer).status(201);
     } catch (e) {
       if (e instanceof ValidationError) {
@@ -43,7 +41,7 @@ export default class CustomerController {
           zip: request.body.address.zip,
         },
       };
-      const customer = await this.customerUsecase.update(customerDto);
+      const customer = await UpdateCustomerUsecase.update(customerDto);
       return response.json(customer).status(200);
     } catch (e) {
       if (e instanceof ValidationError) {
@@ -55,7 +53,7 @@ export default class CustomerController {
 
   async findAll(request: Request, response: Response): Promise<Response> {
     try {
-      const products = await this.customerUsecase.findAll();
+      const products = await GetCustomerUsecase.findAll();
       return response.json(products).status(200);
     } catch (e) {
       return response.json(e).status(500);
@@ -65,7 +63,7 @@ export default class CustomerController {
   async findOne(request: Request, response: Response): Promise<Response> {
     try {
       const id = request.params.id;
-      const product = await this.customerUsecase.findOne(id);
+      const product = await GetCustomerUsecase.findOne(id);
       return response.json(product).status(200);
     } catch (e) {
       return response.json(e).status(500);

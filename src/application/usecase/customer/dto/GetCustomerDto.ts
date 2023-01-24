@@ -12,3 +12,14 @@ type Customer = {
 export interface OutputListCustomerDto {
   customers: Customer[];
 }
+
+export interface OutputFindOneCustomerDto {
+  id: string;
+  name: string;
+  address: {
+    street: string;
+    city: string;
+    number: number;
+    zip: string;
+  };
+}

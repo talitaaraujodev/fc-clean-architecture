@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { v4 as uuid } from 'uuid';
 import { Address } from '../../../../src/domain/customer/valueObject/Address';
 import { Customer } from '../../../../src/domain/customer/model/Customer';

@@ -1,10 +1,9 @@
-import { OrderItemsEntity } from '../../../src/infrastructure/persistence/entities/OrderItemEntity';
-import { v4 as uuid } from 'uuid';
-import { ProductEntity } from '../../../src/infrastructure/persistence/entities/ProductEntity';
-import { OrderEntity } from '../../../src/infrastructure/persistence/entities/OrderEntity';
-import { CustomerEntity } from '../../../src/infrastructure/persistence/entities/CustomerEntitiy';
-import { AddressEntity } from '../../../src/infrastructure/persistence/entities/AddressEntity';
 import { DataSource, Repository } from 'typeorm';
+import { AddressEntity } from '../../../src/infrastructure/persistence/entities/AddressEntity';
+import { CustomerEntity } from '../../../src/infrastructure/persistence/entities/CustomerEntitiy';
+import { OrderEntity } from '../../../src/infrastructure/persistence/entities/OrderEntity';
+import { OrderItemsEntity } from '../../../src/infrastructure/persistence/entities/OrderItemEntity';
+import { ProductEntity } from '../../../src/infrastructure/persistence/entities/ProductEntity';
 
 describe('ProductRepository tests', () => {
   const TestDataSource = new DataSource({

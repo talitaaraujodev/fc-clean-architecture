@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Address } from '../../../../src/domain/customer/valueObject/Address';
 describe('Address tests', () => {
   test('validate_whenStreetEmpty_returnError', () => {

@@ -1,5 +1,6 @@
-import { Product } from '../../../../src/domain/product/model/Product';
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { v4 as uuid } from 'uuid';
+import { Product } from '../../../../src/domain/product/model/Product';
 describe('Product tests', () => {
   test('validate_whenNameEmpty_returnError', () => {
     expect(() => {

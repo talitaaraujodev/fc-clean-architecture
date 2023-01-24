@@ -1,6 +1,6 @@
 import 'reflect-metadata';
-import { AppDataSource } from './infrastructure/config/database/ormconfig';
 import app from './app';
+import { AppDataSource } from './infrastructure/config/database/ormconfig';
 import env from './infrastructure/config/env';
 import { customerRoute } from './presentation/routes/customerRoute';
 

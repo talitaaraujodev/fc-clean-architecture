@@ -1,16 +1,13 @@
-import { CustomerRepositoryImpl } from './../../infrastructure/persistence/repositories/CustomerRepositoryImpl';
+import { Request, Response, Router } from 'express';
 import 'reflect-metadata';
 import { container } from 'tsyringe';
-import { Request, Response, Router } from 'express';
 import CustomerController from '../controllers/CustomerController';
-import { CustomerUsecase } from '../../application/usecase/customer/CustomerUsecase';
+import { CustomerRepositoryImpl } from './../../infrastructure/persistence/repositories/CustomerRepositoryImpl';
+
 export const customerRoute = Router();
 
 container.register('CustomerRepository', {
   useClass: CustomerRepositoryImpl,
-});
-container.register('CustomerUseCaseInput', {
-  useClass: CustomerUsecase,
 });
 container.register('CustomerController', {
   useClass: CustomerController,

@@ -1,10 +1,10 @@
 import { Repository } from 'typeorm';
-import { Address } from '../../../domain/customer/valueObject/Address';
+import { CustomerRepository } from '../../../domain/customer/repository/CustomerRepository';
 import { Customer } from '../../../domain/customer/model/Customer';
-import { CustomerRepository } from 'domain/customer/repository/CustomerRepository';
+import { Address } from '../../../domain/customer/valueObject/Address';
 import { AppDataSource } from '../../config/database/ormconfig';
-import { CustomerEntity } from '../entities/CustomerEntitiy';
 import { AddressEntity } from '../entities/AddressEntity';
+import { CustomerEntity } from '../entities/CustomerEntitiy';
 
 export class CustomerRepositoryImpl implements CustomerRepository {
   private readonly repositoryCustomer: Repository<CustomerEntity> =
@@ -65,13 +65,11 @@ export class CustomerRepositoryImpl implements CustomerRepository {
   }
 
   async findAll(): Promise<Customer[]> {
-    const teste = Object.assign(
+    return Object.assign(
       await this.repositoryCustomer.find({
         relations: ['address'],
       })
     ) as Customer[];
-    console.log(teste);
-    return teste;
   }
 
   async createAddress(address: Address): Promise<AddressEntity> {
