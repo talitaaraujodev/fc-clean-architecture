@@ -2,16 +2,16 @@ import { v4 as uuid } from 'uuid';
 import { ValidationError } from '../../../utils/errors/ValidationError';
 import { OrderItem } from './OrderItem';
 export class Order {
-  private id: string;
-  private customerId: string;
-  private items: OrderItem[];
-  private total: number;
+  private _id: string;
+  private _customerId: string;
+  private _items: OrderItem[];
+  private _total: number;
 
   constructor(id: string, customerId: string, items: OrderItem[]) {
-    this.id = id;
-    this.customerId = customerId;
-    this.items = items;
-    this.total = this.getTotal;
+    this._id = id;
+    this._customerId = customerId;
+    this._items = items;
+    this._total = this.total;
     this.validate();
   }
 
@@ -23,16 +23,16 @@ export class Order {
     return new Order(uuid(), customerId, orderItems);
   }
 
-  get getId(): string {
-    return this.id;
+  get id(): string {
+    return this._id;
   }
 
-  get getCustomerId(): string {
-    return this.customerId;
+  get customerId(): string {
+    return this._customerId;
   }
 
-  get getItems(): OrderItem[] {
-    return this.items;
+  get items(): OrderItem[] {
+    return this._items;
   }
 
   validate(): boolean {
@@ -53,7 +53,7 @@ export class Order {
     return true;
   }
 
-  get getTotal(): number {
+  get total(): number {
     return this.items.reduce((acc, item) => acc + item.price, 0);
   }
 }

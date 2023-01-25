@@ -55,15 +55,15 @@ describe('OrderRepository tests', () => {
 
     const orderEntitySaved = await repositoryOrder.save({
       id: '1',
-      total: order.getTotal,
-      orderItems: order.getItems.map((item) => ({
+      total: order.total,
+      orderItems: order.items.map((item) => ({
         id: item.id,
         quantity: item.quantity,
         price: item.price,
-        ordersId: order.getId,
+        ordersId: order.id,
         productsId: item.id,
       })),
-      customerId: order.getCustomerId,
+      customerId: order.customerId,
     });
 
     expect(orderEntitySaved.customerId).toBe('1');
@@ -89,29 +89,29 @@ describe('OrderRepository tests', () => {
 
     await repositoryOrder.save({
       id: '1',
-      total: order.getTotal,
-      orderItems: order.getItems.map((item) => ({
+      total: order.total,
+      orderItems: order.items.map((item) => ({
         id: item.id,
         quantity: item.quantity,
         price: item.price,
-        ordersId: order.getId,
+        ordersId: order.id,
         productsId: item.id,
       })),
-      customerId: order.getCustomerId,
+      customerId: order.customerId,
     });
     const findOrder: any = await repositoryOrder.findBy({ id: '1' });
 
     const orderEntityUpdate: any = await repositoryOrder.save({
       id: findOrder.id,
       total: 300,
-      orderItems: order.getItems.map((item) => ({
+      orderItems: order.items.map((item) => ({
         id: item.id,
         quantity: item.quantity,
         price: item.price,
-        ordersId: order.getId,
+        ordersId: order.id,
         productsId: item.id,
       })),
-      customerId: order.getCustomerId,
+      customerId: order.customerId,
     });
 
     expect(findOrder[0].total).not.toBe(orderEntityUpdate.total);
@@ -136,15 +136,15 @@ describe('OrderRepository tests', () => {
 
     await repositoryOrder.save({
       id: '1',
-      total: order.getTotal,
-      orderItems: order.getItems.map((item) => ({
+      total: order.total,
+      orderItems: order.items.map((item) => ({
         id: item.id,
         quantity: item.quantity,
         price: item.price,
-        ordersId: order.getId,
+        ordersId: order.id,
         productsId: item.id,
       })),
-      customerId: order.getCustomerId,
+      customerId: order.customerId,
     });
 
     const findOrder: any = await repositoryOrder.findBy({ id: '1' });

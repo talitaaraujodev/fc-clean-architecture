@@ -28,12 +28,12 @@ describe('Order tests', () => {
 
     const order = new Order(uuid(), uuid(), [item1]);
 
-    let total = order.getTotal;
+    let total = order.total;
 
-    expect(order.getTotal).toBe(10);
+    expect(order.total).toBe(10);
 
     const order2 = new Order(uuid(), uuid(), [item1, item2]);
-    total = order2.getTotal;
+    total = order2.total;
     expect(total).toBe(30);
   });
 });

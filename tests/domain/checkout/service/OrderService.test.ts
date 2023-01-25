@@ -11,7 +11,7 @@ describe('OrderService tests', () => {
     const order = OrderService.placeOrder(customer, [item1]);
 
     expect(customer.rewardPoints).toBe(5);
-    expect(order.getTotal).toBe(10);
+    expect(order.total).toBe(10);
   });
   test('total_whenOrdersValid_returnTotal', () => {
     const item1 = new OrderItem(uuid(), 100, uuid(), 1);

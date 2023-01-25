@@ -15,11 +15,11 @@ describe('Product tests', () => {
   test('changeName_whenNameToChange_returnName', () => {
     const product = new Product(uuid(), 'Product 1', 50);
     product.changeName('Product 2');
-    expect(product.getName).toBe('Product 2');
+    expect(product.name).toBe('Product 2');
   });
   test('changePrice_whenPriceToChange_returnPrice', () => {
     const product = new Product(uuid(), 'Product 1', 50);
     product.changePrice(100);
-    expect(product.getPrice).toBe(100);
+    expect(product.price).toBe(100);
   });
 });

@@ -4,7 +4,7 @@ import { CustomerRepository } from './../../../domain/customer/repository/Custom
 import { CustomerRepositoryImpl } from './../../../infrastructure/persistence/repositories/CustomerRepositoryImpl';
 import {
   OutputFindOneCustomerDto,
-  OutputListCustomerDto,
+  OutputListCustomerDto
 } from './dto/GetCustomerDto';
 
 class GetCustomerUsecase {

@@ -1,21 +1,21 @@
 import { Repository } from 'typeorm';
-import { ProductEntity } from '../../../infrastructure/persistence/entities/ProductEntity';
-import { AppDataSource } from '../../../infrastructure/config/database/ormconfig';
 import { Product } from '../../../domain/product/model/Product';
 import { ProductRepository } from '../../../domain/product/repository/ProductRepository';
+import { AppDataSource } from '../../../infrastructure/config/database/ormconfig';
+import { ProductEntity } from '../../../infrastructure/persistence/entities/ProductEntity';
 
-export default class ProductRepositoryImpl implements ProductRepository {
+export  class ProductRepositoryImpl implements ProductRepository {
   private readonly repository: Repository<ProductEntity> =
     AppDataSource.getRepository(ProductEntity);
 
-  async create(product: Product): Promise<Product | null> {
+  async create(product: Product): Promise<Product> {
     const productEntitySaved: any = await this.repository.save(
-      new ProductEntity(null, product.getName, product.getPrice)
+      new ProductEntity(product.id, product.name, product.price)
     );
     return new Product(
       productEntitySaved.id,
-      product.getName,
-      product.getPrice
+      productEntitySaved.name,
+      productEntitySaved.price
     );
   }
 
@@ -24,19 +24,15 @@ export default class ProductRepositoryImpl implements ProductRepository {
     return new Product(product.id, product.name, product.price);
   }
 
-  async findAll(): Promise<Product[] | null> {
+  async findAll(): Promise<Product[]> {
     return Object.assign(await this.repository.find()) as Product[];
   }
 
-  async update(product: Product): Promise<Product | null> {
-    await this.find(product.getId);
+  async update(product: Product): Promise<Product> {
+    await this.find(product.id);
     const productEntityUpdate: any = await this.repository.save(
-      new ProductEntity(product.getId, product.getName, product.getPrice)
+      new ProductEntity(product.id, product.name, product.price)
     );
-    return new Product(
-      productEntityUpdate.id,
-      product.getName,
-      product.getPrice
-    );
+    return new Product(productEntityUpdate.id, product.name, product.price);
   }
 }

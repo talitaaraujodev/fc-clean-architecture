@@ -2,13 +2,13 @@ import { inject } from 'tsyringe';
 import { Customer } from './../../../domain/customer/model/Customer';
 import { CustomerRepository } from './../../../domain/customer/repository/CustomerRepository';
 import { Address } from './../../../domain/customer/valueObject/Address';
-import { CustomerRepositoryImpl } from './../../../infrastructure/persistence/repositories/CustomerRepositoryImpl';
+ import { CustomerRepositoryImpl } from './../../../infrastructure/persistence/repositories/CustomerRepositoryImpl';
 import {
   InputCreateCustomerDto,
-  OutputCreateCustomerDto,
+  OutputCreateCustomerDto
 } from './dto/CreateCustomerDto';
 
-export class CreateCustomerUsecase {
+ class CreateCustomerUsecase {
   constructor(
     @inject('CustomerRepository')
     private readonly customerRepository: CustomerRepository
@@ -27,7 +27,7 @@ export class CreateCustomerUsecase {
       )
     );
 
-    return this.customerRepository.create(customer);
+    return await this.customerRepository.create(customer);
   }
 }
 export default new CreateCustomerUsecase(new CustomerRepositoryImpl());

@@ -1,8 +1,8 @@
 import { Repository } from 'typeorm';
-import { OrderEntity } from '../entities/OrderEntity';
-import { AppDataSource } from '../../config/database/ormconfig';
 import { Order } from '../../../domain/checkout/model/Order';
-import { OrderRepository } from 'domain/checkout/repository/IOrderRepository';
+import { OrderRepository } from '../../../domain/checkout/repository/OrderRepository';
+import { AppDataSource } from '../../config/database/ormconfig';
+import { OrderEntity } from '../entities/OrderEntity';
 
 export class OrderRepositoryImpl implements OrderRepository {
   private readonly orderRepository: Repository<OrderEntity> =
@@ -10,37 +10,33 @@ export class OrderRepositoryImpl implements OrderRepository {
 
   async create(order: Order): Promise<Order> {
     const orderEntitySaved: any = await this.orderRepository.save({
-      total: order.getTotal,
-      orderItems: order.getItems.map((item) => ({
-        id: item.getId,
-        quantity: item.getQuantity,
-        price: item.getPrice,
-        ordersId: order.getId,
-        productsId: item.getProductId,
+      total: order.total,
+      orderItems: order.items.map((item) => ({
+        id: item.id,
+        quantity: item.quantity,
+        price: item.price,
+        ordersId: order.id,
+        productsId: item.productId,
       })),
-      customerId: order.getCustomerId,
+      customerId: order.customerId,
     });
-    return new Order(orderEntitySaved.id, order.getCustomerId, order.getItems);
+    return new Order(orderEntitySaved.id, order.customerId, order.items);
   }
 
   async update(order: Order): Promise<Order> {
-    await this.find(order.getId);
+    await this.find(order.id);
     const orderEntityUpdated: any = await this.orderRepository.save({
-      total: order.getTotal,
-      orderItems: order.getItems.map((item) => ({
-        id: item.getId,
-        quantity: item.getQuantity,
-        price: item.getPrice,
-        ordersId: order.getId,
-        productsId: item.getId,
+      total: order.total,
+      orderItems: order.items.map((item) => ({
+        id: item.id,
+        quantity: item.quantity,
+        price: item.price,
+        ordersId: order.id,
+        productsId: item.productId,
       })),
-      customerId: order.getCustomerId,
+      customerId: order.customerId,
     });
-    return new Order(
-      orderEntityUpdated.id,
-      order.getCustomerId,
-      order.getItems
-    );
+    return new Order(orderEntityUpdated.id, order.customerId, order.items);
   }
 
   async find(id: string): Promise<Order> {

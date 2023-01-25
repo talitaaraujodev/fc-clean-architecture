@@ -14,7 +14,7 @@ class App {
     this.app.use(cors());
   }
 
-  public listen(port: number, routes: Router): void {
+  public listen(port: number, routes: Router[]): void {
     this.app.use(routes);
     this.app.listen(port, () => {
       console.log(`Server is running on: http://localhost:${port}`);

@@ -1,6 +1,6 @@
-import { Request, Response, Router } from 'express';
 import 'reflect-metadata';
 import { container } from 'tsyringe';
+import { Request, Response, Router } from 'express';
 import CustomerController from '../controllers/CustomerController';
 import { CustomerRepositoryImpl } from './../../infrastructure/persistence/repositories/CustomerRepositoryImpl';
 
