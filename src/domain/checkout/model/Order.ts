@@ -1,6 +1,6 @@
-import { OrderItem } from './OrderItem';
 import { v4 as uuid } from 'uuid';
 import { ValidationError } from '../../../utils/errors/ValidationError';
+import { OrderItem } from './OrderItem';
 export class Order {
   private id: string;
   private customerId: string;
@@ -15,8 +15,12 @@ export class Order {
     this.validate();
   }
 
-  static createToSaved(customerId: string, items: OrderItem[]): Order {
-    return new Order(uuid(), customerId, items);
+  public static createToSaved(customerId: string, items: OrderItem[]): Order {
+    const orderItems = items.map((item) => {
+      return new OrderItem(item.id, item.price, item.productId, item.quantity);
+    });
+
+    return new Order(uuid(), customerId, orderItems);
   }
 
   get getId(): string {
@@ -42,7 +46,7 @@ export class Order {
       throw new ValidationError('Items é um campo obrigatório');
     }
 
-    if (this.items.some((item) => item.getQuantity <= 0)) {
+    if (this.items.some((item) => item.quantity <= 0)) {
       throw new ValidationError('Quantity deve ser maior que zero');
     }
 
@@ -50,6 +54,6 @@ export class Order {
   }
 
   get getTotal(): number {
-    return this.items.reduce((acc, item) => acc + item.getPrice, 0);
+    return this.items.reduce((acc, item) => acc + item.price, 0);
   }
 }

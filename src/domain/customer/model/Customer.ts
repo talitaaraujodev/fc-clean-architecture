@@ -1,6 +1,6 @@
+import { v4 as uuid } from 'uuid';
 import { ValidationError } from '../../../utils/errors/ValidationError';
 import { Address } from '../valueObject/Address';
-import { v4 as uuid } from 'uuid';
 export class Customer {
   private _id: string;
   private _name: string = '';

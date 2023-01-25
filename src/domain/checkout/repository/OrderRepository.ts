@@ -1,4 +1,4 @@
-import { Order } from '../model/Order';
+import { Order } from '../../../domain/checkout/model/Order';
 
 export interface OrderRepository {
   create(order: Order): Promise<Order>;

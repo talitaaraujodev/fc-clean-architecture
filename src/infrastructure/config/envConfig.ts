@@ -7,5 +7,5 @@ export = {
   dbHost: process.env.PG_HOST || 'localhost',
   dbPort: Number(process.env.PG_PORT) || 5432,
   dbUser: process.env.PG_USER || 'username',
-  dbPassword: process.env.PG_PASSWORD || '123456',
+  dbPassword: process.env.PG_PASSWORD || 'secret',
 };

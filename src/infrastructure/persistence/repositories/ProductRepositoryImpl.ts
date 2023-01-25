@@ -2,7 +2,7 @@ import { Repository } from 'typeorm';
 import { ProductEntity } from '../../../infrastructure/persistence/entities/ProductEntity';
 import { AppDataSource } from '../../../infrastructure/config/database/ormconfig';
 import { Product } from '../../../domain/product/model/Product';
-import { ProductRepository } from '../../../domain/product/repository/IProductRepository';
+import { ProductRepository } from '../../../domain/product/repository/ProductRepository';
 
 export default class ProductRepositoryImpl implements ProductRepository {
   private readonly repository: Repository<ProductEntity> =

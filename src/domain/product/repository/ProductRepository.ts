@@ -1,4 +1,4 @@
-import { Product } from '../model/Product';
+import { Product } from '../../../domain/product/model/Product';
 
 export interface ProductRepository {
   create(product: Product): Promise<Product | null>;

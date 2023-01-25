@@ -57,11 +57,11 @@ describe('OrderRepository tests', () => {
       id: '1',
       total: order.getTotal,
       orderItems: order.getItems.map((item) => ({
-        id: item.getId,
-        quantity: item.getQuantity,
-        price: item.getPrice,
+        id: item.id,
+        quantity: item.quantity,
+        price: item.price,
         ordersId: order.getId,
-        productsId: item.getId,
+        productsId: item.id,
       })),
       customerId: order.getCustomerId,
     });
@@ -91,11 +91,11 @@ describe('OrderRepository tests', () => {
       id: '1',
       total: order.getTotal,
       orderItems: order.getItems.map((item) => ({
-        id: item.getId,
-        quantity: item.getQuantity,
-        price: item.getPrice,
+        id: item.id,
+        quantity: item.quantity,
+        price: item.price,
         ordersId: order.getId,
-        productsId: item.getId,
+        productsId: item.id,
       })),
       customerId: order.getCustomerId,
     });
@@ -105,11 +105,11 @@ describe('OrderRepository tests', () => {
       id: findOrder.id,
       total: 300,
       orderItems: order.getItems.map((item) => ({
-        id: item.getId,
-        quantity: item.getQuantity,
-        price: item.getPrice,
+        id: item.id,
+        quantity: item.quantity,
+        price: item.price,
         ordersId: order.getId,
-        productsId: item.getId,
+        productsId: item.id,
       })),
       customerId: order.getCustomerId,
     });
@@ -138,11 +138,11 @@ describe('OrderRepository tests', () => {
       id: '1',
       total: order.getTotal,
       orderItems: order.getItems.map((item) => ({
-        id: item.getId,
-        quantity: item.getQuantity,
-        price: item.getPrice,
+        id: item.id,
+        quantity: item.quantity,
+        price: item.price,
         ordersId: order.getId,
-        productsId: item.getId,
+        productsId: item.id,
       })),
       customerId: order.getCustomerId,
     });

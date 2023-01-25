@@ -1,4 +1,3 @@
-// value object
 export class Address {
   private _street: string = '';
   private _number: number = 0;

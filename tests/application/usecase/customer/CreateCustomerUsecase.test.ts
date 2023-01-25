@@ -1,3 +1,0 @@
-describe('CreateCustomerUsecase tests', () => {
-  test('', () => {});
-});

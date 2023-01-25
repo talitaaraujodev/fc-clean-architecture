@@ -5,7 +5,7 @@ import { CustomerEntity } from '../../persistence/entities/CustomerEntitiy';
 import { AddressEntity } from '../../persistence/entities/AddressEntity';
 import { ProductEntity } from '../../persistence/entities/ProductEntity';
 import { OrderItemsEntity } from '../../persistence/entities/OrderItemEntity';
-import env from '../env';
+import env from '../envConfig';
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
