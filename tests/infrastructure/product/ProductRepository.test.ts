@@ -48,11 +48,13 @@ describe('ProductRepository tests', () => {
       name: 'Product test',
       price: 10,
     });
-    const product: any = await productRepository.findBy({ id: '123' });
+    const product: any = await productRepository.findOne({
+      where: { id: '123' },
+    });
 
-    expect(product[0].name).toBe('Product test');
-    expect(product[0].price).toBe(10);
-    expect(product[0]).toHaveProperty('id');
+    expect(product.name).toBe('Product test');
+    expect(product.price).toBe(10);
+    expect(product).toHaveProperty('id');
   });
   test('findAll_findAllProducts_returnSuccess', async () => {
     await productRepository.save({
@@ -72,15 +74,17 @@ describe('ProductRepository tests', () => {
       name: 'Product test',
       price: 10,
     });
-    const product: any = await productRepository.findBy({ id: '123' });
+    const product: any = await productRepository.findOne({
+      where: { id: '123' },
+    });
 
     const productEntityUpdate: any = await productRepository.save({
-      id: product[0].id,
+      id: product.id,
       name: 'Product test update',
       price: 10,
     });
 
-    expect(product[0].name).not.toBe(productEntityUpdate.name);
+    expect(product.name).not.toBe(productEntityUpdate.name);
     expect(productEntityUpdate).toHaveProperty('id');
   });
 });

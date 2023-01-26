@@ -1,9 +1,9 @@
-import { OrderItemsEntity } from '../../../src/infrastructure/persistence/entities/OrderItemEntity';
-import { AddressEntity } from '../../../src/infrastructure/persistence/entities/AddressEntity';
-import { ProductEntity } from '../../../src/infrastructure/persistence/entities/ProductEntity';
-import { OrderEntity } from '../../../src/infrastructure/persistence/entities/OrderEntity';
-import { CustomerEntity } from '../../../src/infrastructure/persistence/entities/CustomerEntitiy';
 import { DataSource, Repository } from 'typeorm';
+import { AddressEntity } from '../../../src/infrastructure/persistence/entities/AddressEntity';
+import { CustomerEntity } from '../../../src/infrastructure/persistence/entities/CustomerEntitiy';
+import { OrderEntity } from '../../../src/infrastructure/persistence/entities/OrderEntity';
+import { OrderItemsEntity } from '../../../src/infrastructure/persistence/entities/OrderItemEntity';
+import { ProductEntity } from '../../../src/infrastructure/persistence/entities/ProductEntity';
 
 describe('CustomerRepository tests', () => {
   const TestDataSource = new DataSource({
@@ -120,14 +120,16 @@ describe('CustomerRepository tests', () => {
       id: '123',
       name: 'Customer test',
     });
-    const customer: any = await repositoryCustomer.findBy({ id: '123' });
+    const customer: any = await repositoryCustomer.findOne({
+      where: { id: '123' },
+    });
 
     const customerEntityUpdate: any = await repositoryCustomer.save({
-      id: customer[0].id,
+      id: customer.id,
       name: 'Customer test update',
     });
 
-    expect(customer[0].name).not.toBe(customerEntityUpdate.name);
+    expect(customer.name).not.toBe(customerEntityUpdate.name);
     expect(customerEntityUpdate).toHaveProperty('id');
   });
   test('createAddress_whenAddressValid_returnSuccess', async () => {
@@ -156,17 +158,19 @@ describe('CustomerRepository tests', () => {
       zip: '15220-250',
       city: 'São Paulo',
     });
-    const address: any = await repositoryAddress.findBy({ id: '1' });
+    const address: any = await repositoryAddress.findOne({
+      where: { id: '1' },
+    });
 
     const addressEntityUpdate: any = await repositoryAddress.save({
-      id: address[0].id,
+      id: address.id,
       street: 'Rua ABC',
       number: 123,
       zip: '15220-250',
       city: 'Fortaleza',
     });
 
-    expect(address[0].city).not.toBe(addressEntityUpdate.city);
+    expect(address.city).not.toBe(addressEntityUpdate.city);
     expect(addressEntityUpdate).toHaveProperty('zip');
   });
 });

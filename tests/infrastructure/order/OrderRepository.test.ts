@@ -99,7 +99,9 @@ describe('OrderRepository tests', () => {
       })),
       customer: { id: order.customerId },
     });
-    const findOrder: any = await repositoryOrder.findBy({ id: '1' });
+    const findOrder: any = await repositoryOrder.findOne({
+      where: { id: '1' },
+    });
 
     const orderEntityUpdate: any = await repositoryOrder.save({
       id: findOrder.id,
@@ -114,7 +116,7 @@ describe('OrderRepository tests', () => {
       customer: { id: order.customerId },
     });
 
-    expect(findOrder[0].total).not.toBe(orderEntityUpdate.total);
+    expect(findOrder.total).not.toBe(orderEntityUpdate.total);
     expect(orderEntityUpdate).toHaveProperty('id');
   });
   test('find_whenOrderValid_returnSuccess', async () => {

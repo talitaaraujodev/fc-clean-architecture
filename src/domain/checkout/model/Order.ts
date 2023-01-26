@@ -45,9 +45,14 @@ export class Order {
     if (this.items.length === 0) {
       throw new ValidationError('Items é um campo obrigatório');
     }
-
     if (this.items.some((item) => item.quantity <= 0)) {
       throw new ValidationError('Quantity deve ser maior que zero');
+    }
+    if (this.items.some((item) => item.price <= 0)) {
+      throw new ValidationError('Price deve ser maior que zero');
+    }
+    if (this.items.some((item) => item.productId === '')) {
+      throw new ValidationError('ProductId é um campo obrigatório');
     }
 
     return true;
