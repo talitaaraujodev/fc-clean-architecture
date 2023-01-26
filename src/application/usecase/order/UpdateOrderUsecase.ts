@@ -1,12 +1,12 @@
+import { inject, injectable } from 'tsyringe';
+import { OrderRepository } from '../../../domain/checkout/repository/OrderRepository';
 import {
   InputUpdateOrderDto,
   OutputUpdateOrderDto,
 } from './dto/UpdateOrderDto';
-import { OrderRepositoryImpl } from './../../../infrastructure/persistence/repositories/OrderRepositoryImpl';
-import { inject } from 'tsyringe';
-import { OrderRepository } from '../../../domain/checkout/repository/OrderRepository';
 
-class UpdateOrderUsecase {
+@injectable()
+export class UpdateOrderUsecase {
   constructor(
     @inject('OrderRepository')
     private readonly orderRepository: OrderRepository
@@ -28,4 +28,3 @@ class UpdateOrderUsecase {
     };
   }
 }
-export default new UpdateOrderUsecase(new OrderRepositoryImpl());

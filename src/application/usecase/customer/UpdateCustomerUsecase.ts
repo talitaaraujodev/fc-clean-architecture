@@ -1,13 +1,13 @@
-import { inject } from 'tsyringe';
+import { inject, injectable } from 'tsyringe';
 import { CustomerRepository } from '../../../domain/customer/repository/CustomerRepository';
 import { Address } from '../../../domain/customer/valueObject/Address';
-import { CustomerRepositoryImpl } from './../../../infrastructure/persistence/repositories/CustomerRepositoryImpl';
 import {
   InputUpdateCustomerDto,
   OutputUpdateCustomerDto,
 } from './dto/UpdateCustomerDto';
 
-class UpdateCustomerUsecase {
+@injectable()
+export class UpdateCustomerUsecase {
   constructor(
     @inject('CustomerRepository')
     private readonly customerRepository: CustomerRepository
@@ -40,4 +40,3 @@ class UpdateCustomerUsecase {
     };
   }
 }
-export default new UpdateCustomerUsecase(new CustomerRepositoryImpl());

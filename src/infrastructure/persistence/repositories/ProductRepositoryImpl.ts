@@ -4,7 +4,7 @@ import { ProductRepository } from '../../../domain/product/repository/ProductRep
 import { AppDataSource } from '../../../infrastructure/config/database/ormconfig';
 import { ProductEntity } from '../../../infrastructure/persistence/entities/ProductEntity';
 
-export  class ProductRepositoryImpl implements ProductRepository {
+export class ProductRepositoryImpl implements ProductRepository {
   private readonly repository: Repository<ProductEntity> =
     AppDataSource.getRepository(ProductEntity);
 

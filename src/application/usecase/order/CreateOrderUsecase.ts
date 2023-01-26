@@ -1,15 +1,15 @@
 import { v4 as uuid } from 'uuid';
-import { inject } from 'tsyringe';
+import { inject, injectable } from 'tsyringe';
 import { OrderItem } from './../../../domain/checkout/model/OrderItem';
 import { OrderRepository } from '../../../domain/checkout/repository/OrderRepository';
 import { Order } from './../../../domain/checkout/model/Order';
-import { OrderRepositoryImpl } from './../../../infrastructure/persistence/repositories/OrderRepositoryImpl';
 import {
   InputCreateOrderDto,
   OutputCreateOrderDto,
 } from './dto/CreateOrderDto';
 
-class CreateOrderUsecase {
+@injectable()
+export class CreateOrderUsecase {
   constructor(
     @inject('OrderRepository')
     private readonly orderRepository: OrderRepository
@@ -24,4 +24,3 @@ class CreateOrderUsecase {
     return await this.orderRepository.create(order);
   }
 }
-export default new CreateOrderUsecase(new OrderRepositoryImpl());

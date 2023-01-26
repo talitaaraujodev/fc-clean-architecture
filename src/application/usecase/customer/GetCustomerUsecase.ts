@@ -1,13 +1,13 @@
-import { inject } from 'tsyringe';
+import { inject, injectable } from 'tsyringe';
 import { Customer } from '../../../domain/customer/model/Customer';
 import { CustomerRepository } from './../../../domain/customer/repository/CustomerRepository';
-import { CustomerRepositoryImpl } from './../../../infrastructure/persistence/repositories/CustomerRepositoryImpl';
 import {
   OutputFindOneCustomerDto,
-  OutputListCustomerDto
+  OutputListCustomerDto,
 } from './dto/GetCustomerDto';
 
-class GetCustomerUsecase {
+@injectable()
+export class GetCustomerUsecase {
   constructor(
     @inject('CustomerRepository')
     private readonly customerRepository: CustomerRepository
@@ -44,4 +44,3 @@ class GetCustomerUsecase {
     };
   }
 }
-export default new GetCustomerUsecase(new CustomerRepositoryImpl());

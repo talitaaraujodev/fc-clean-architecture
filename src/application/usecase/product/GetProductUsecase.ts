@@ -1,13 +1,12 @@
-import { inject } from 'tsyringe';
+import { inject, injectable } from 'tsyringe';
 import { Product } from './../../../domain/product/model/Product';
-import { ProductRepositoryImpl } from '../../../infrastructure/persistence/repositories/ProductRepositoryImpl';
 import { ProductRepository } from './../../../domain/product/repository/ProductRepository';
 import {
   OutputFindOneProductDto,
   OutputListProductDto,
 } from './dto/GetProductDto';
-
-class GetProductUsecase {
+@injectable()
+export class GetProductUsecase {
   constructor(
     @inject('ProductRepository')
     private readonly productRepository: ProductRepository
@@ -34,4 +33,3 @@ class GetProductUsecase {
     };
   }
 }
-export default new GetProductUsecase(new ProductRepositoryImpl());

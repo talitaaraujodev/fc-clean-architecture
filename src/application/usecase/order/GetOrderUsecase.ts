@@ -1,10 +1,9 @@
-import { inject } from 'tsyringe';
+import { inject, injectable } from 'tsyringe';
 import { OrderRepository } from '../../../domain/checkout/repository/OrderRepository';
 import { Order } from './../../../domain/checkout/model/Order';
-import { OrderRepositoryImpl } from './../../../infrastructure/persistence/repositories/OrderRepositoryImpl';
 import { OutputFindOneOrderDto, OutputListOrderDto } from './dto/GetOrderDto';
-
-class GetOrderUsecase {
+@injectable()
+export class GetOrderUsecase {
   constructor(
     @inject('OrderRepository')
     private readonly orderRepository: OrderRepository
@@ -42,4 +41,3 @@ class GetOrderUsecase {
     };
   }
 }
-export default new GetOrderUsecase(new OrderRepositoryImpl());

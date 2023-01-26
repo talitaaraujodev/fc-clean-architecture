@@ -1,10 +1,11 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
+import { CreateCustomerUsecase } from '../../application/usecase/customer/CreateCustomerUsecase';
+import { GetCustomerUsecase } from '../../application/usecase/customer/GetCustomerUsecase';
+import { UpdateCustomerUsecase } from '../../application/usecase/customer/UpdateCustomerUsecase';
 import { ValidationError } from '../../utils/errors/ValidationError';
-import GetCustomerUsecase from '../../application/usecase/customer/GetCustomerUsecase';
-import UpdateCustomerUsecase from '../../application/usecase/customer/UpdateCustomerUsecase';
-import CreateCustomerUsecase from '../../application/usecase/customer/CreateCustomerUsecase';
 
-export default class CustomerController {
+export class CustomerController {
   constructor() {}
 
   async create(request: Request, response: Response): Promise<Response> {
@@ -19,7 +20,11 @@ export default class CustomerController {
         },
       };
 
-      const customer = await CreateCustomerUsecase.create(customerDto);
+      const createCustomerUsecase: CreateCustomerUsecase = container.resolve(
+        'CreateCustomerUsecase'
+      );
+
+      const customer = await createCustomerUsecase.create(customerDto);
       return response.json(customer).status(201);
     } catch (e) {
       if (e instanceof ValidationError) {
@@ -41,7 +46,11 @@ export default class CustomerController {
           zip: request.body.address.zip,
         },
       };
-      const customer = await UpdateCustomerUsecase.update(customerDto);
+      const updateCustomerUsecase: UpdateCustomerUsecase = container.resolve(
+        'UpdateCustomerUsecase'
+      );
+
+      const customer = await updateCustomerUsecase.update(customerDto);
       return response.json(customer).status(200);
     } catch (e) {
       if (e instanceof ValidationError) {
@@ -53,7 +62,10 @@ export default class CustomerController {
 
   async findAll(request: Request, response: Response): Promise<Response> {
     try {
-      const products = await GetCustomerUsecase.findAll();
+      const getCustomerUsecase: GetCustomerUsecase =
+        container.resolve('GetCustomerUsecase');
+
+      const products = await getCustomerUsecase.findAll();
       return response.json(products).status(200);
     } catch (e) {
       return response.json(e).status(500);
@@ -63,7 +75,10 @@ export default class CustomerController {
   async findOne(request: Request, response: Response): Promise<Response> {
     try {
       const id = request.params.id;
-      const product = await GetCustomerUsecase.findOne(id);
+      const getCustomerUsecase: GetCustomerUsecase =
+        container.resolve('GetCustomerUsecase');
+
+      const product = await getCustomerUsecase.findOne(id);
       return response.json(product).status(200);
     } catch (e) {
       return response.json(e).status(500);

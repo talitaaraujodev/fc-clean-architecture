@@ -1,10 +1,11 @@
 import { Request, Response } from 'express';
-import CreateProductUsecase from '../../application/usecase/product/CreateProductUsecase';
-import GetProductUsecase from '../../application/usecase/product/GetProductUsecase';
-import UpdateProductUsecase from '../../application/usecase/product/UpdateProductUsecase';
+import { container } from 'tsyringe';
+import { CreateProductUsecase } from '../../application/usecase/product/CreateProductUsecase';
+import { GetProductUsecase } from '../../application/usecase/product/GetProductUsecase';
+import { UpdateProductUsecase } from '../../application/usecase/product/UpdateProductUsecase';
 import { ValidationError } from '../../utils/errors/ValidationError';
 
-export default class ProductController {
+export class ProductController {
   constructor() {}
 
   async create(request: Request, response: Response): Promise<Response> {
@@ -13,8 +14,10 @@ export default class ProductController {
         name: request.body.name,
         price: request.body.price,
       };
-
-      const product = await CreateProductUsecase.create(productDto);
+      const createProductUsecase: CreateProductUsecase = container.resolve(
+        'CreateProductUsecase'
+      );
+      const product = await createProductUsecase.create(productDto);
       return response.json(product).status(201);
     } catch (e) {
       if (e instanceof ValidationError) {
@@ -31,7 +34,10 @@ export default class ProductController {
         name: request.body.name,
         price: request.body.price,
       };
-      const product = await UpdateProductUsecase.update(productUpdateDto);
+      const updateProductUsecase: UpdateProductUsecase = container.resolve(
+        'UpdateProductUsecase'
+      );
+      const product = await updateProductUsecase.update(productUpdateDto);
       return response.json(product).status(200);
     } catch (e) {
       if (e instanceof ValidationError) {
@@ -43,7 +49,9 @@ export default class ProductController {
 
   async findAll(request: Request, response: Response): Promise<Response> {
     try {
-      const products = await GetProductUsecase.findAll();
+      const getProductUsecase: GetProductUsecase =
+        container.resolve('GetProductUsecase');
+      const products = await getProductUsecase.findAll();
       return response.json(products).status(200);
     } catch (e) {
       return response.json(e).status(500);
@@ -53,7 +61,9 @@ export default class ProductController {
   async findOne(request: Request, response: Response): Promise<Response> {
     try {
       const id = request.params.id;
-      const product = await GetProductUsecase.findOne(id);
+      const getProductUsecase: GetProductUsecase =
+        container.resolve('GetProductUsecase');
+      const product = await getProductUsecase.findOne(id);
       return response.json(product).status(200);
     } catch (e) {
       return response.json(e).status(500);

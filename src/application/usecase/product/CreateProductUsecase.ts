@@ -1,13 +1,13 @@
-import { inject } from 'tsyringe';
-import { ProductRepositoryImpl } from '../../../infrastructure/persistence/repositories/ProductRepositoryImpl';
+import { inject, injectable } from 'tsyringe';
 import { Product } from './../../../domain/product/model/Product';
 import { ProductRepository } from './../../../domain/product/repository/ProductRepository';
 import {
   InputCreateProductDto,
-  OutputCreateProductDto
+  OutputCreateProductDto,
 } from './dto/CreateProductDto';
 
-class CreateProductUsecase {
+@injectable()
+export class CreateProductUsecase {
   constructor(
     @inject('ProductRepository')
     private readonly productRepository: ProductRepository
@@ -19,4 +19,3 @@ class CreateProductUsecase {
     return await this.productRepository.create(product);
   }
 }
-export default new CreateProductUsecase(new ProductRepositoryImpl());

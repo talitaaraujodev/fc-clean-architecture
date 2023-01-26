@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
-import CreateOrderUsecase from '../../application/usecase/order/CreateOrderUsecase';
-import GetOrderUsecase from '../../application/usecase/order/GetOrderUsecase';
-import UpdateOrderUsecase from '../../application/usecase/order/UpdateOrderUsecase';
+import { container } from 'tsyringe';
+import { CreateOrderUsecase } from '../../application/usecase/order/CreateOrderUsecase';
+import { GetOrderUsecase } from '../../application/usecase/order/GetOrderUsecase';
+import { UpdateOrderUsecase } from '../../application/usecase/order/UpdateOrderUsecase';
 import { ValidationError } from '../../utils/errors/ValidationError';
 
 export class OrderController {
@@ -19,7 +20,10 @@ export class OrderController {
         total: request.body.total,
       };
 
-      const order = await CreateOrderUsecase.create(orderDto);
+      const createOrderUsecase: CreateOrderUsecase =
+        container.resolve('CreateOrderUsecase');
+
+      const order = await createOrderUsecase.create(orderDto);
       return response.json(order).status(201);
     } catch (e) {
       if (e instanceof ValidationError) {
@@ -41,7 +45,10 @@ export class OrderController {
         })),
         total: request.body.total,
       };
-      const order = await UpdateOrderUsecase.update(orderUpdateDto);
+      const updateOrderUsecase: UpdateOrderUsecase =
+        container.resolve('GetOrderUsecase');
+
+      const order = await updateOrderUsecase.update(orderUpdateDto);
       return response.json(order).status(200);
     } catch (e) {
       if (e instanceof ValidationError) {
@@ -53,7 +60,10 @@ export class OrderController {
 
   async findAll(request: Request, response: Response): Promise<Response> {
     try {
-      const orders = await GetOrderUsecase.findAll();
+      const getOrderUsecase: GetOrderUsecase =
+        container.resolve('GetOrderUsecase');
+
+      const orders = await getOrderUsecase.findAll();
       return response.json(orders).status(200);
     } catch (e) {
       return response.json(e).status(500);
@@ -63,7 +73,11 @@ export class OrderController {
   async findOne(request: Request, response: Response): Promise<Response> {
     try {
       const id = request.params.id;
-      const order = await GetOrderUsecase.findOne(id);
+
+      const getOrderUsecase: GetOrderUsecase =
+        container.resolve('GetOrderUsecase');
+
+      const order = await getOrderUsecase.findOne(id);
       return response.json(order).status(200);
     } catch (e) {
       return response.json(e).status(500);

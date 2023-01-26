@@ -1,15 +1,27 @@
-import 'reflect-metadata';
 import { container } from 'tsyringe';
 import { Request, Response, Router } from 'express';
-import CustomerController from '../controllers/CustomerController';
+import { CustomerController } from '../controllers/CustomerController';
 import { CustomerRepositoryImpl } from './../../infrastructure/persistence/repositories/CustomerRepositoryImpl';
+import { GetCustomerUsecase } from '../../application/usecase/customer/GetCustomerUsecase';
+import { CreateCustomerUsecase } from '../../application/usecase/customer/CreateCustomerUsecase';
+import { UpdateCustomerUsecase } from '../../application/usecase/customer/UpdateCustomerUsecase';
+import { InjectionTokens } from './../../utils/InjectionTokens';
 
 export const customerRoute = Router();
 
-container.register('CustomerRepository', {
+container.register(InjectionTokens.CUSTOMER_PERSISTENCE_REPOSITORY, {
   useClass: CustomerRepositoryImpl,
 });
-container.register('CustomerController', {
+container.register(InjectionTokens.GET_CUSTOMER_USECASE, {
+  useClass: GetCustomerUsecase,
+});
+container.register(InjectionTokens.CREATE_CUSTOMER_USECASE, {
+  useClass: CreateCustomerUsecase,
+});
+container.register(InjectionTokens.UPDATE_CUSTOMER_USECASE, {
+  useClass: UpdateCustomerUsecase,
+});
+container.register(InjectionTokens.CUSTOMER_CONTROLLER, {
   useClass: CustomerController,
 });
 const customerController: CustomerController =
