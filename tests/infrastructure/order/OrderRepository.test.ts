@@ -63,10 +63,10 @@ describe('OrderRepository tests', () => {
         ordersId: order.id,
         productsId: item.id,
       })),
-      customerId: order.customerId,
+      customer: { id: order.customerId },
     });
 
-    expect(orderEntitySaved.customerId).toBe('1');
+    expect(orderEntitySaved.customer.id).toBe('1');
     expect(orderEntitySaved.orderItems).toBeInstanceOf(Array);
     expect(orderEntitySaved.total).toBe(100);
   });
@@ -97,7 +97,7 @@ describe('OrderRepository tests', () => {
         ordersId: order.id,
         productsId: item.id,
       })),
-      customerId: order.customerId,
+      customer: { id: order.customerId },
     });
     const findOrder: any = await repositoryOrder.findBy({ id: '1' });
 
@@ -111,7 +111,7 @@ describe('OrderRepository tests', () => {
         ordersId: order.id,
         productsId: item.id,
       })),
-      customerId: order.customerId,
+      customer: { id: order.customerId },
     });
 
     expect(findOrder[0].total).not.toBe(orderEntityUpdate.total);
@@ -144,13 +144,15 @@ describe('OrderRepository tests', () => {
         ordersId: order.id,
         productsId: item.id,
       })),
-      customerId: order.customerId,
+      customer: { id: order.customerId },
     });
 
-    const findOrder: any = await repositoryOrder.findBy({ id: '1' });
+    const findOrder: any = await repositoryOrder.findOne({
+      where: { id: '1' },
+    });
 
-    expect(findOrder[0].total).toBe(100);
-    expect(findOrder[0]).toHaveProperty('id');
+    expect(findOrder.total).toBe(100);
+    expect(findOrder).toHaveProperty('id');
   });
   test('findAll_findAllCustomers_returnSuccess', async () => {
     const orders: OrderEntity[] = await repositoryOrder.find();

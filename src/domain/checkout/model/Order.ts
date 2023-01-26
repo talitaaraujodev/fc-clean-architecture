@@ -15,14 +15,6 @@ export class Order {
     this.validate();
   }
 
-  public static createToSaved(customerId: string, items: OrderItem[]): Order {
-    const orderItems = items.map((item) => {
-      return new OrderItem(item.id, item.price, item.productId, item.quantity);
-    });
-
-    return new Order(uuid(), customerId, orderItems);
-  }
-
   get id(): string {
     return this._id;
   }
@@ -33,6 +25,14 @@ export class Order {
 
   get items(): OrderItem[] {
     return this._items;
+  }
+
+  static createToSaved(customerId: string, items: OrderItem[]): Order {
+    const orderItems = items.map((item) => {
+      return new OrderItem(uuid(), item.price, item.productId, item.quantity);
+    });
+
+    return new Order(uuid(), customerId, orderItems);
   }
 
   validate(): boolean {

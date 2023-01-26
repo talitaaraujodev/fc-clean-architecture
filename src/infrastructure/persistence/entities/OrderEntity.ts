@@ -15,7 +15,7 @@ export class OrderEntity {
   id: string;
 
   @ManyToOne(() => CustomerEntity, (address) => address.orders)
-  @JoinColumn({ name: 'customerId' })
+  @JoinColumn([{ name: 'customerId', referencedColumnName: 'id' }])
   customer: CustomerEntity;
 
   @OneToMany(() => OrderItemsEntity, (orderItems) => orderItems.orders)
