@@ -11,9 +11,9 @@ describe('Customer tests', () => {
   test('changeName_whenNameToChange_returnName', () => {
     const customer = new Customer(uuid(), 'Customer test');
 
-    customer.changeName('Jubileu');
+    customer.changeName('Customer test 2');
 
-    expect(customer.name).toBe('Jubileu');
+    expect(customer.name).toBe('Customer test 2');
   });
   test('activate_whenProductActivate_returnSuccess', () => {
     const customer = new Customer(uuid(), 'Customer test');

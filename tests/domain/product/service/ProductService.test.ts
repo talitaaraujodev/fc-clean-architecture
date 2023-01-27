@@ -4,8 +4,8 @@ import { ProductService } from '../../../../src/domain/product/service/ProductSe
 
 describe('Product service unit tests', () => {
   test('increasePrice_whenProductsIsValid_returnPriceChanged', () => {
-    const product1 = new Product(uuid(), 'Produto 1', 10);
-    const product2 = new Product(uuid(), 'Produto 1', 20);
+    const product1 = new Product(uuid(), 'Produto test 1', 10);
+    const product2 = new Product(uuid(), 'Produto test 2', 20);
     const products = [product1, product2];
 
     ProductService.increasePrice(products, 100);

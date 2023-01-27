@@ -16,11 +16,11 @@ export class CreateOrderUsecase {
   ) {}
 
   async create(input: InputCreateOrderDto): Promise<OutputCreateOrderDto> {
-    const orderItems = input.items.map((item) => {
+    const orderItems: OrderItem[] = input.items.map((item) => {
       return new OrderItem(uuid(), item.price, item.productId, item.quantity);
     });
 
-    const order = new Order(uuid(), input.customerId, orderItems);
+    const order = Order.createToSaved(input.customerId, orderItems);
     return await this.orderRepository.create(order);
   }
 }

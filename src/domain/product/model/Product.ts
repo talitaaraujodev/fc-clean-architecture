@@ -47,7 +47,7 @@ export class Product {
     if (this.name.length === 0) {
       throw new ValidationError('Name é um campo obrigatório');
     }
-    if (this.price < 0) {
+    if (this.price <= 0) {
       throw new ValidationError('Price deve ser maior que zero');
     }
     return true;

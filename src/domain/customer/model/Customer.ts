@@ -33,7 +33,7 @@ export class Customer {
   }
 
   validate() {
-    if (this.id === '') {
+    if (this.id.length === 0) {
       throw new ValidationError('Id é um campo obrigatório');
     }
     if (this.name.length === 0) {

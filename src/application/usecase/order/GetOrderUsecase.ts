@@ -11,7 +11,6 @@ export class GetOrderUsecase {
 
   async findAll(): Promise<OutputListOrderDto> {
     const orders: Order[] = await this.orderRepository.findAll();
-    console.log(orders);
     return {
       orders: orders.map((order: any) => ({
         id: order.id,
@@ -28,7 +27,6 @@ export class GetOrderUsecase {
 
   async findOne(id: string): Promise<OutputFindOneOrderDto> {
     const order: Order = await this.orderRepository.find(id);
-    console.log(order);
     return {
       id: order.id,
       customerId: order.customerId,

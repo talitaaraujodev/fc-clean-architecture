@@ -13,12 +13,12 @@ describe('Product tests', () => {
     }).toThrowError('Price deve ser maior que zero');
   });
   test('changeName_whenNameToChange_returnName', () => {
-    const product = new Product(uuid(), 'Product 1', 50);
-    product.changeName('Product 2');
+    const product = new Product(uuid(), 'Product test', 50);
+    product.changeName('Product test 2');
     expect(product.name).toBe('Product 2');
   });
   test('changePrice_whenPriceToChange_returnPrice', () => {
-    const product = new Product(uuid(), 'Product 1', 50);
+    const product = new Product(uuid(), 'Product test', 50);
     product.changePrice(100);
     expect(product.price).toBe(100);
   });
